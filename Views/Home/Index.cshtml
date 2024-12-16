@@ -1,0 +1,41 @@
+﻿@model IndexViewModel
+
+@{
+    ViewData["Title"] = "Home Page";
+
+    var actors = Model.Actors.Select(a => new SelectListItem(a, a));
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>    
+</div>
+
+@using (Html.BeginForm("Index", "Home", FormMethod.Post)) {
+
+    <fieldset>
+
+            Actor from:
+
+            @Html.DropDownList("actorFrom", actors)
+
+        <p>
+
+            <input type="submit" value="Submit" />
+
+        </p>
+
+    </fieldset>
+
+}
+
+@if (Model.SearchSteps != null) 
+{
+    <p>Steps:</p>
+    <ul>
+    @foreach (var step in Model.SearchSteps) 
+    {
+        <li>@step.StepType - @step.Name</li>
+    }
+    </ul>
+}
